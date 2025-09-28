@@ -3,136 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Neuro Earth</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: #fff;
-      background-color: #111;
-    }
-
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 40px;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 1000;
-    }
-
-    header .logo {
-      display: flex;
-      align-items: center;
-      font-size: 1.3em;
-      font-weight: bold;
-      color: #00ffcc;
-    }
-
-    header .logo svg {
-      width: 40px;
-      height: 40px;
-    }
-
-    header .logo span {
-      margin-left: 10px;
-    }
-
-    nav a {
-      margin-left: 20px;
-      text-decoration: none;
-      color: #fff;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #00ffcc;
-    }
-
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
-      background: url("https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80") no-repeat center center/cover;
-    }
-
-    .hero h1 {
-      font-size: 2.5em;
-      font-weight: bold;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 6px #000;
-    }
-
-    .hero p {
-      font-size: 1.2em;
-      margin-bottom: 30px;
-      max-width: 700px;
-      text-shadow: 1px 1px 4px #000;
-    }
-
-    .btn {
-      background: #00ffcc;
-      color: #111;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1em;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-      text-decoration: none;
-    }
-
-    .btn:hover {
-      background: #00cc99;
-    }
-
-    /* Responsivo */
-    @media (max-width: 768px) {
-      header {
-        padding: 10px 20px;
-      }
-
-      .hero h1 {
-        font-size: 2em;
-      }
-
-      .hero p {
-        font-size: 1em;
-      }
-    }
-  </style>
+  <title>Neural Earth</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Cabeçalho -->
   <header>
     <div class="logo">
       <!-- Logo SVG futurista -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#00ffcc">
-        <circle cx="32" cy="32" r="30" stroke="#00ffcc" stroke-width="4" fill="none"/>
-        <path d="M10 32a22 22 0 0044 0 22 22 0 00-44 0z" fill="none" stroke="#00ffcc" stroke-width="3"/>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="40" height="40" fill="#00ffcc">
+        <circle cx="32" cy="32" r="30" stroke="#00ffcc" stroke-width="3" fill="none"/>
+        <path d="M10 32a22 22 0 0044 0 22 22 0 00-44 0z" fill="none" stroke="#00ffcc" stroke-width="2"/>
         <circle cx="32" cy="32" r="6" fill="#00ffcc"/>
       </svg>
-      <span>Neuro Earth</span>
+      <span>Neural Earth</span>
     </div>
     <nav>
       <a href="#sobre">Sobre</a>
-      <a href="#novidades">Novidades</a>
+      <a href="#visao">Visão</a>
       <a href="#contato">Contato</a>
     </nav>
   </header>
 
+  <!-- Hero -->
   <section class="hero">
-    <h1>O Futuro da Sustentabilidade e Tecnologia</h1>
-    <p>A Neuro Earth conecta inovação digital com impacto positivo no planeta.</p>
-    <a href="#contato" class="btn">Fale Conosco</a>
+    <div class="hero-text">
+      <h1>A Infraestrutura Global para Agentes Digitais Autônomos</h1>
+      <p>Neural Earth conecta identidade, conhecimento, raciocínio e ação em uma rede global de agentes.</p>
+      <a href="#visao" class="btn">Nossa Visão</a>
+    </div>
   </section>
+
+  <!-- Seção Sobre -->
+  <section id="sobre">
+    <h2>Sobre</h2>
+    <p>A Neural Earth é a base para uma nova economia de agentes autônomos que colaboram entre si e com humanos.</p>
+  </section>
+
+  <!-- Seção Visão -->
+  <section id="visao">
+    <h2>Visão</h2>
+    <p>Um planeta digital onde cada pessoa, empresa e governo pode criar e interagir com agentes inteligentes, sustentáveis e globais.</p>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato">
+    <h2>Contato</h2>
+    <p>📧 Email: <a href="mailto:jardelmiguellopes03@gmail.com">jardelmiguellopes03@gmail.com</a></p>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>© 2025 Neural Earth - Conectando o futuro dos agentes digitais.</p>
+  </footer>
 </body>
-</html>
+  </html>
