@@ -1,88 +1,91 @@
-/* Reset básico */
-body {
+/* Reset */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body {
   line-height: 1.6;
   color: #333;
 }
 
 /* Navbar */
-header {
-  background: #222;
+.navbar {
+  background: #1e2a38;
   color: #fff;
-  padding: 15px 20px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-header nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 15px 40px;
 }
 
 .logo {
-  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
   font-weight: bold;
-  color: #28a745; /* Verde */
+  color: white;
+  text-decoration: none;
 }
 
-.logo span {
-  color: #2a6fdb; /* Azul */
+.logo-img {
+  height: 45px;   /* ajuste do tamanho da logo */
+  margin-right: 10px;
 }
 
-header nav ul {
+.nav-links {
   list-style: none;
   display: flex;
-  gap: 15px;
+  gap: 20px;
 }
 
-header nav ul li a {
-  color: #fff;
+.nav-links a {
   text-decoration: none;
-  font-weight: bold;
+  color: #fff;
+  font-weight: 500;
 }
 
-header nav ul li a:hover {
-  color: #2ecc71;
+.nav-links a:hover {
+  color: #4cafef;
 }
 
 /* Hero */
 .hero {
-  background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470') center/cover no-repeat;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  background: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80") no-repeat center center/cover;
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 120px 20px;
 }
 
 .hero h1 {
-  font-size: 2.5rem;
-  max-width: 800px;
+  font-size: 3rem;
+  font-weight: 800;
+  max-width: 900px;
+  margin: 0 auto 25px;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
 }
 
 .hero p {
-  margin-top: 15px;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
 }
 
-.hero .btn {
+.btn {
+  display: inline-block;
+  padding: 14px 35px;
   background: #28a745;
   color: white;
-  padding: 12px 25px;
-  margin-top: 25px;
+  border-radius: 8px;
+  font-size: 1.1rem;
   text-decoration: none;
-  border-radius: 5px;
   font-weight: bold;
-  transition: 0.3s;
 }
 
-.hero .btn:hover {
+.btn:hover {
   background: #218838;
 }
 
@@ -92,37 +95,66 @@ section {
   text-align: center;
 }
 
-/* Formulários */
-form input,
-form textarea {
-  width: 100%;
-  max-width: 400px;
-  margin: 10px auto;
+.sobre, .novidades, .contato {
+  background: #f9f9f9;
+  margin-top: 20px;
+  border-radius: 12px;
+  padding: 40px 20px;
+}
+
+/* Contato */
+form {
+  max-width: 500px;
+  margin: 20px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input, textarea {
   padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  display: block;
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 100%;
 }
 
-form button {
-  background: #28a745;
-  color: white;
-  padding: 12px 25px;
+button.btn {
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
 }
 
-form button:hover {
-  background: #218838;
-}
-
-/* Rodapé */
+/* Footer */
 footer {
-  background: #222;
+  background: #1e2a38;
   color: white;
   text-align: center;
   padding: 15px;
-    }
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;   /* menor no celular */
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 12px 25px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .logo-img {
+    height: 35px; /* menor no celular */
+  }
+  }
