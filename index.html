@@ -7,20 +7,21 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Cabeçalho -->
+  <!-- Navbar -->
   <header>
     <nav>
-      <h1>🌍 Neuro Earth</h1>
+      <div class="logo">Neuro <span>Earth</span></div>
       <ul>
         <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#newsletter">Novidades</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Seção Hero -->
+  <!-- Hero -->
   <section class="hero">
-    <h2>Transformando o futuro com tecnologia e sustentabilidade</h2>
+    <h1>Transformando o futuro com tecnologia e sustentabilidade</h1>
     <p>Nosso objetivo é criar soluções inovadoras que conectam pessoas e o planeta.</p>
     <a href="#contato" class="btn">Fale Conosco</a>
   </section>
@@ -28,24 +29,39 @@
   <!-- Sobre -->
   <section id="sobre">
     <h2>Sobre a Neuro Earth</h2>
-    <p>A Neuro Earth é uma startup focada em unir tecnologia de ponta com sustentabilidade,
-       desenvolvendo soluções que impactam positivamente o meio ambiente e a sociedade.</p>
+    <p>A Neuro Earth é uma startup focada em soluções inteligentes para sustentabilidade,
+       tecnologia verde e impacto social.</p>
+  </section>
+
+  <!-- Newsletter -->
+  <section id="newsletter">
+    <h2>Receba Novidades</h2>
+    <form action="https://formspree.io/f/mnqekpwo" method="POST">
+      <input type="email" name="email" placeholder="Digite seu email" required>
+      <button type="submit">Quero Receber</button>
+    </form>
   </section>
 
   <!-- Contato -->
   <section id="contato">
     <h2>Entre em Contato</h2>
-    <p>Você pode nos enviar um e-mail diretamente em:</p>
-    <p>
-      <a href="mailto:jardelmiguellopes03@gmail.com">
-        jardelmiguellopes03@gmail.com
-      </a>
+    <p>📧 Email: 
+      <strong><a href="mailto:jardelmiguellopes03@gmail.com">jardelmiguellopes03@gmail.com</a></strong>
     </p>
+
+    <form action="https://formspree.io/f/mnqekpwo" method="POST">
+      <input type="text" name="nome" placeholder="Seu nome" required>
+      <input type="email" name="_replyto" placeholder="Seu email" required>
+      <textarea name="mensagem" placeholder="Escreva sua mensagem..." required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
   </section>
 
   <!-- Rodapé -->
   <footer>
-    <p>© 2025 Neuro Earth. Todos os direitos reservados.</p>
+    <p>© 2025 Neuro Earth | Contato: 
+      <a href="mailto:jardelmiguellopes03@gmail.com">jardelmiguellopes03@gmail.com</a>
+    </p>
   </footer>
 </body>
-</html>
+    </html>
