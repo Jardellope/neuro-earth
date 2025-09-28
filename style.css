@@ -21,20 +21,11 @@ body {
   padding: 15px 40px;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-}
-
 .logo-img {
-  height: 45px;   /* ajuste do tamanho da logo */
-  margin-right: 10px;
+  height: 50px;  /* tamanho da logo no topo */
 }
 
+/* Links da navbar */
 .nav-links {
   list-style: none;
   display: flex;
@@ -53,22 +44,23 @@ body {
 
 /* Hero */
 .hero {
-  background: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80") no-repeat center center/cover;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+              url("https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1600&q=80") no-repeat center center/cover;
   color: white;
   text-align: center;
   padding: 120px 20px;
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 800;
   max-width: 900px;
-  margin: 0 auto 25px;
+  margin: 0 auto 20px;
   text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
 }
 
 .hero p {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   max-width: 700px;
   margin: 0 auto 30px;
   text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
@@ -137,24 +129,12 @@ footer {
 /* Responsividade */
 @media (max-width: 768px) {
   .hero h1 {
-    font-size: 2rem;   /* menor no celular */
+    font-size: 1.8rem;
   }
-
   .hero p {
     font-size: 1rem;
   }
-
-  .btn {
-    font-size: 1rem;
-    padding: 12px 25px;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    gap: 10px;
-  }
-
   .logo-img {
-    height: 35px; /* menor no celular */
+    height: 40px;
   }
   }
