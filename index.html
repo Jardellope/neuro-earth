@@ -4,59 +4,117 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Neuro Earth</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: #000;
+    }
+
+    /* Header */
+    header {
+      background-color: #1a1f36;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header svg {
+      height: 45px;
+      margin-right: 12px;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.4em;
+      font-weight: bold;
+    }
+
+    header nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    header nav a:hover {
+      color: #00ffcc;
+    }
+
+    /* Hero section */
+    .hero {
+      background: url('https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') 
+                  no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.8em;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+
+    .hero p {
+      font-size: 1.4em;
+      max-width: 800px;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+    }
+
+    .btn {
+      margin-top: 25px;
+      padding: 14px 28px;
+      background-color: #00cc66;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #00aa55;
+    }
+  </style>
 </head>
 <body>
-  <!-- Navbar -->
+  <!-- Cabeçalho -->
   <header>
-    <nav class="navbar">
-      <div class="logo">
-        <img src="🌎" alt="Logo Neuro Earth">
-      </div>
-      <ul class="nav-links">
-        <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#novidades">Novidades</a></li>
-        <li><a href="#contato">Contato</a></li>
-      </ul>
+    <div class="logo">
+      <!-- Logo em SVG futurista -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#00ffcc">
+        <circle cx="32" cy="32" r="30" stroke="#00ffcc" stroke-width="4" fill="none"/>
+        <path d="M10 32a22 22 0 0044 0 22 22 0 00-44 0z" fill="none" stroke="#00ffcc" stroke-width="3"/>
+        <circle cx="32" cy="32" r="6" fill="#00ffcc"/>
+      </svg>
+      Neuro Earth
+    </div>
+    <nav>
+      <a href="#sobre">Sobre</a>
+      <a href="#novidades">Novidades</a>
+      <a href="#contato">Contato</a>
     </nav>
   </header>
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-text">
-      <h1>O Futuro da Sustentabilidade e Tecnologia</h1>
-      <p>A Neuro Earth conecta inovação digital com impacto positivo no planeta.</p>
-      <a href="#contato" class="btn">Fale Conosco</a>
-    </div>
+    <h1>Transformando o futuro com tecnologia e sustentabilidade</h1>
+    <p>Nosso objetivo é criar soluções inovadoras que conectam pessoas e o planeta.</p>
+    <button class="btn">Fale Conosco</button>
   </section>
-
-  <!-- Sobre -->
-  <section id="sobre">
-    <h2>Sobre</h2>
-    <p>A Neuro Earth é uma startup global que une inteligência artificial, dados e sustentabilidade para transformar o mundo.</p>
-  </section>
-
-  <!-- Novidades -->
-  <section id="novidades">
-    <h2>Novidades</h2>
-    <p>Estamos desenvolvendo soluções tecnológicas que irão revolucionar a forma como nos conectamos com o meio ambiente.</p>
-  </section>
-
-  <!-- Contato -->
-  <section id="contato">
-    <h2>Contato</h2>
-    <p>📧 Mande uma mensagem para: <strong>jardelmiguellopes03@gmail.com</strong></p>
-    <form action="mailto:jardelmiguellopes03@gmail.com" method="post" enctype="text/plain">
-      <input type="text" name="nome" placeholder="Seu nome" required>
-      <input type="email" name="email" placeholder="Seu e-mail" required>
-      <textarea name="mensagem" rows="5" placeholder="Escreva sua mensagem..." required></textarea>
-      <button type="submit" class="btn">Enviar</button>
-    </form>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Neuro Earth - Todos os direitos reservados.</p>
-  </footer>
 </body>
-        </html>
+</html>
