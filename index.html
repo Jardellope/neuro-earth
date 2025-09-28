@@ -7,52 +7,53 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       color: #fff;
-      background: #000;
+      background-color: #111;
     }
 
-    /* Header */
     header {
-      background-color: #1a1f36;
-      padding: 15px 40px;
+      position: fixed;
+      top: 0;
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: fixed;
-      width: 100%;
-      top: 0;
+      padding: 15px 40px;
+      background: rgba(0, 0, 0, 0.85);
       z-index: 1000;
-    }
-
-    header svg {
-      height: 45px;
-      margin-right: 12px;
     }
 
     header .logo {
       display: flex;
       align-items: center;
-      font-size: 1.4em;
+      font-size: 1.3em;
       font-weight: bold;
-    }
-
-    header nav a {
-      margin-left: 25px;
-      text-decoration: none;
-      color: #fff;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    header nav a:hover {
       color: #00ffcc;
     }
 
-    /* Hero section */
+    header .logo svg {
+      width: 40px;
+      height: 40px;
+    }
+
+    header .logo span {
+      margin-left: 10px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00ffcc;
+    }
+
     .hero {
-      background: url('https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') 
-                  no-repeat center center/cover;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -60,48 +61,66 @@
       align-items: center;
       text-align: center;
       padding: 0 20px;
+      background: url("https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80") no-repeat center center/cover;
     }
 
     .hero h1 {
-      font-size: 2.8em;
-      margin-bottom: 15px;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      font-size: 2.5em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 6px #000;
     }
 
     .hero p {
-      font-size: 1.4em;
-      max-width: 800px;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      max-width: 700px;
+      text-shadow: 1px 1px 4px #000;
     }
 
     .btn {
-      margin-top: 25px;
-      padding: 14px 28px;
-      background-color: #00cc66;
-      color: #fff;
+      background: #00ffcc;
+      color: #111;
+      padding: 12px 24px;
       border: none;
-      border-radius: 6px;
-      font-size: 1.1em;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: 0.3s;
+      text-decoration: none;
     }
 
     .btn:hover {
-      background-color: #00aa55;
+      background: #00cc99;
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      header {
+        padding: 10px 20px;
+      }
+
+      .hero h1 {
+        font-size: 2em;
+      }
+
+      .hero p {
+        font-size: 1em;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Cabeçalho -->
   <header>
     <div class="logo">
-      <!-- Logo em SVG futurista -->
+      <!-- Logo SVG futurista -->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#00ffcc">
         <circle cx="32" cy="32" r="30" stroke="#00ffcc" stroke-width="4" fill="none"/>
         <path d="M10 32a22 22 0 0044 0 22 22 0 00-44 0z" fill="none" stroke="#00ffcc" stroke-width="3"/>
         <circle cx="32" cy="32" r="6" fill="#00ffcc"/>
       </svg>
-      Neuro Earth
+      <span>Neuro Earth</span>
     </div>
     <nav>
       <a href="#sobre">Sobre</a>
@@ -110,11 +129,10 @@
     </nav>
   </header>
 
-  <!-- Hero Section -->
   <section class="hero">
-    <h1>Transformando o futuro com tecnologia e sustentabilidade</h1>
-    <p>Nosso objetivo é criar soluções inovadoras que conectam pessoas e o planeta.</p>
-    <button class="btn">Fale Conosco</button>
+    <h1>O Futuro da Sustentabilidade e Tecnologia</h1>
+    <p>A Neuro Earth conecta inovação digital com impacto positivo no planeta.</p>
+    <a href="#contato" class="btn">Fale Conosco</a>
   </section>
 </body>
 </html>
