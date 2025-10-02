@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Axiom Core — Nexus Alpha (Integrated)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg-1: #030316;
+    --bg-2: #071028;
+    --panel: rgba(255,255,255,0.02);
+    --neon: #00fff2;
+    --neon-2: #6b5bff;
+    --muted: #9fb3bf;
+    --accent: #6b5bff;
+    --card-radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:radial-gradient(circle at 10% 10%, rgba(0,255,242,0.02), transparent 12%), linear-gradient(180deg,var(--bg-1),var(--bg-2));color:#e6f7f6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1100px;margin:20px auto;padding:20px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:76px;height:76px;border-radius:12px;background:linear-gradient(135deg,var(--neon),var(--neon-2));display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(107,91,255,0.06)}
+  .logo svg{width:56px;height:56px}
+  h1{margin:0;font-size:20px}
+  .tag{color:var(--muted);font-size:13px}
+  nav{display:flex;gap:8px}
+  .btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:9px;color:var(--muted);cursor:pointer;font-weight:700}
+  .btn.primary{background:linear-gradient(90deg,var(--neon),var(--neon-2));color:#041426;border:none;box-shadow:0 10px 30px rgba(0,255,242,0.06)}
+  main{margin-top:18px}
+  .hero{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:22px;border-radius:var(--card-radius);border:1px solid rgba(255,255,255,0.03);display:flex;gap:18px;align-items:center}
+  .hero-left{flex:1}
+  .hero-right{width:380px}
+  .lead{color:var(--muted);margin-top:8px}
+  .kpis{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+  .kpi{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;min-width:160px}
+  section.card{margin-top:18px;padding:18px;background:var(--panel);border-radius:var(--card-radius);border:1px solid rgba(255,255,255,0.03)}
+  h2{margin:0 0 8px 0}
+  .cols{display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start}
+  @media(max-width:980px){.cols{grid-template-columns:1fr}.hero-right{width:100%}}
+  .pill{background:rgba(255,255,255,0.04);padding:6px 10px;border-radius:999px;font-weight:700}
+  .pilares{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+  @media(max-width:720px){.pilares{grid-template-columns:1fr}}
+  .pillar{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border:1px solid rgba(0,255,242,0.04)}
+  .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  label{display:block;font-size:13px;color:var(--muted);margin-top:8px}
+  input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit}
+  input[type=range]{width:200px}
+  .sim-grid{display:grid;grid-template-columns:320px 1fr 320px;gap:18px}
+  @media(max-width:1100px){.sim-grid{grid-template-columns:1fr}}
+  .stat-big{font-size:18px;font-weight:900}
+  .table{width:100%;border-collapse:collapse;margin-top:10px}
+  .table td,.table th{padding:8px;border-bottom:1px solid rgba(255,255,255,0.03)}
+  .muted{color:var(--muted)}
+  .footer{margin-top:22px;text-align:center;color:var(--muted);font-size:13px}
+  .cta-row{display:flex;gap:12px;align-items:center;margin-top:12px}
+  .chart-box{height:220px;border-radius:12px;background:linear-gradient(135deg,#041122,#072b18);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.06);font-weight:700}
+  .assumptions{margin-top:12px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);color:var(--muted);display:none}
+  .download{display:inline-block;margin-left:8px}
+  footer.small{color:var(--muted);font-size:13px;margin-top:18px;text-align:center}
+  .accent-line{height:4px;width:120px;border-radius:8px;background:linear-gradient(90deg,var(--neon),var(--neon-2));margin-top:12px}
+  .info{background:rgba(255,255,255,0.018);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+  /* AX spin (only the text element) */
+  @keyframes spinAX {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes glowAX {
+    0% { filter:drop-shadow(0 0 6px rgba(0,255,242,0.35)); opacity:1; }
+    100% { filter:drop-shadow(0 0 24px rgba(107,91,255,0.2)); opacity:1; }
+  }
+  /* initial boot spin for 2.2s, then keep glow only (JS will toggle) */
+  .ax-text.boot-spin { animation: spinAX 2.2s linear forwards, glowAX 2s ease-in-out infinite alternate; transform-origin:50% 50%; }
+  .ax-text.glow-only { animation: glowAX 2s ease-in-out infinite alternate; transform-origin:50% 50%; }
+  /* make svg text look neon */
+  .ax-text { fill: #00fff2; font-family: "Segoe UI", Roboto, Arial; font-weight:700; font-size:32px; }
+  /* audio control subtle visibility */
+  .audio-controls { display:flex;gap:8px;align-items:center;margin-top:10px }
+  .small-btn { font-size:12px;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);color:var(--muted);cursor:pointer }
+</style>
+</head>
+<body>
+  <div class="wrap" role="main">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- logo: square + circle static, only AX text will spin -->
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Axiom Core logo">
+            <rect width="100" height="100" rx="14" fill="#041025"/>
+            <circle cx="50" cy="50" r="34" fill="#00fff2" opacity="0.08"/>
+            <!-- AX text: we will add class via JS initially .boot-spin -->
+            <text x="50" y="58" text-anchor="middle" class="ax-text boot-spin">AX</text>
+          </svg>
+        </div>
+        <div>
+          <h1>Axiom Core</h1>
+          <div class="tag">Simulador Global Científico — Transparente & Auditável</div>
+        </div>
+      </div>
+
+      <nav>
+        <button class="btn" onclick="scrollToSection('home')">Home</button>
+        <button class="btn" onclick="scrollToSection('problema')">Problema</button>
+        <button class="btn" onclick="scrollToSection('solucao')">Solução</button>
+        <button class="btn primary" onclick="downloadPitch()">Baixar Pitch (PDF)</button>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <main id="home" class="hero" aria-label="Resumo">
+      <div class="hero-left">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="font-weight:800;font-size:20px">Decisões Globais com Alta Fidelidade</div>
+          <div class="pill">Nexus Alpha — Protótipo</div>
+        </div>
+        <div class="lead">Painel que cruza dados abertos globais com um motor de simulação determinístico — tudo auditável, com faixas de incerteza e fontes públicas citadas.</div>
+
+        <div class="kpis">
+          <div class="kpi"><div class="muted">PIB Global (proxy)</div><div id="gdpPill" class="stat-big">US$ 100 tri</div></div>
+          <div class="kpi"><div class="muted">Emissões globais (Mt CO₂/ano)</div><div id="co2Pill" class="stat-big">37,000</div></div>
+          <div class="kpi"><div class="muted">Empregos renováveis (M)</div><div id="jobsPill" class="stat-big">13.7 M</div></div>
+        </div>
+
+        <div class="cta-row">
+          <button class="btn primary" onclick="scrollToSection('sim')">Ver Simulador</button>
+          <button class="btn" onclick="scrollToSection('contato')">Contato</button>
+          <button class="btn" onclick="document.getElementById('assumptionsBox').style.display = (document.getElementById('assumptionsBox').style.display === 'block')?'none':'block'">Ver Fontes</button>
+        </div>
+        <div class="accent-line"></div>
+      </div>
+
+      <div class="hero-right">
+        <div style="padding:12px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);border:1px solid rgba(255,255,255,0.03)">
+          <div style="font-size:13px;color:var(--muted)">Demo — Mapa & Resumo</div>
+          <div class="chart-box" style="margin-top:12px">Mapa Interativo (Mock)</div>
+          <div style="margin-top:12px;color:var(--muted);font-size:13px">Pronto para demo ao vivo com exportação de snapshots.</div>
+          <div class="audio-controls">
+            <button class="small-btn" id="playEpicBtn">▶ Tocar tema épico</button>
+            <button class="small-btn" id="stopEpicBtn">■ Parar</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- PROBLEMA -->
+    <section id="problema" class="card" aria-labelledby="problemaTitle">
+      <h2 id="problemaTitle">O Problema Global</h2>
+      <div class="muted">A sociedade e mercado enfrentam decisões de alto impacto sem uma visão sistêmica e neutra dos dados.</div>
+      <ul style="margin-top:12px;line-height:1.6">
+        <li><strong>Dados fragmentados:</strong> múltiplas fontes, formatos e disponibilidade desigual entre países.</li>
+        <li><strong>Vieses institucionais:</strong> relatórios e modelos que favorecem agendas específicas reduzem confiança.</li>
+        <li><strong>Decisões lentas:</strong> ausência de simulações robustas impede respostas rápidas a crises.</li>
+        <li><strong>Impacto real:</strong> políticas mal calibradas custam trilhões e aumentam desigualdade e riscos climáticos.</li>
+      </ul>
+    </section>
+
+    <!-- SOLUÇÃO -->
+    <section id="solucao" class="card" aria-labelledby="solucaoTitle">
+      <h2 id="solucaoTitle">A Solução — <span style="color:var(--neon)">Axiom Core</span></h2>
+      <div class="muted">Um núcleo científico global, auditável e replicável que permite simular políticas e investimentos com alta fidelidade.</div>
+
+      <div style="display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:12px">
+        <div>
+          <h3 style="margin-top:0">O que fazemos</h3>
+          <ol style="line-height:1.6">
+            <li><strong>Integramos</strong> dados públicos e validados (World Bank, OWID, IRENA, IEA).</li>
+            <li><strong>Executamos</strong> simulações determinísticas (cenários controlados e auditáveis).</li>
+            <li><strong>Fornecemos</strong> KPIs acionáveis (PIB, emissões, empregos, custo/benefício).</li>
+            <li><strong>Entregamos</strong> transparência: suposições e fontes são exportáveis e verificáveis.</li>
+          </ol>
+        </div>
+
+        <div>
+          <div class="info"><strong>Diferencial técnico</strong>
+            <p class="muted" style="margin:6px 0">Motor determinístico + cadeia de proveniência de dados + UX imersiva para decisores (governo & corporações).</p>
+          </div>
+
+          <div style="margin-top:12px" class="info"><strong>Objetivo central</strong>
+            <p class="muted" style="margin:6px 0">Construir a maior infraestrutura de decisões civis do planeta — auditável, neutra e global.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PILARES -->
+    <section id="pilares" class="card">
+      <h2>Os 4 Pilares (com objetivos)</h2>
+      <div class="pilares">
+        <div class="pillar">
+          <h3>Nexus — Governança preditiva</h3>
+          <p class="muted">Objetivo: Modelar decisões geopolíticas em tempo real, identificar trade-offs e propor estratégias coordenadas.</p>
+        </div>
+        <div class="pillar">
+          <h3>Theia — Gestão planetária</h3>
+          <p class="muted">Objetivo: Integrar água, energia e alimentos para otimizar alocação e resiliência.</p>
+        </div>
+        <div class="pillar">
+          <h3>Prometheus — Aceleração científica</h3>
+          <p class="muted">Objetivo: Identificar hipóteses de alto impacto e conectar pesquisadores globalmente.</p>
+        </div>
+        <div class="pillar">
+          <h3>Eudaimonia — Saúde & bem-estar</h3>
+          <p class="muted">Objetivo: Prever riscos sanitários e promover intervenções preventivas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIMULADOR -->
+    <section id="sim" class="card">
+      <h2>Simulador Global — Rode cenários realistas</h2>
+      <div class="muted">Experimente cenários que estimam impacto em PIB, emissões e empregos. As suposições são visíveis e exportáveis.</div>
+
+      <div style="margin-top:12px" class="sim-grid">
+        <!-- controls -->
+        <div class="info" aria-hidden="false">
+          <label for="scenarioSelect">Cenário</label>
+          <select id="scenarioSelect">
+            <option value="solar">Energia Solar — Expansão</option>
+            <option value="carbon">Imposto sobre Carbono</option>
+            <option value="agri">Agricultura Sustentável</option>
+            <option value="pand">Investimento em Saúde</option>
+          </select>
+
+          <label for="intensity">Intensidade (%)</label>
+          <input id="intensity" type="range" min="0" max="100" value="30">
+
+          <label for="duration">Duração (anos)</label>
+          <input id="duration" type="number" min="1" max="50" value="10">
+
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <button class="btn primary" id="runSimBtn">▶ Rodar</button>
+            <button class="btn" id="resetSimBtn">Reset</button>
+            <button class="btn" id="playFuturistBtn">🔊 Tocar som tech</button>
+          </div>
+
+          <div id="assumptionsBox" class="assumptions" style="margin-top:12px" aria-hidden="true">
+            <strong>Suposições principais</strong>
+            <ul>
+              <li>Dados base: OWID (CO₂), World Bank (GDP), IRENA (empregos renováveis)</li>
+              <li>Escalas e proxies calibrados com relatórios IEA/IRENA.</li>
+              <li>Incerteza padrão visualizada: ±10% (ajustável).</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- preview -->
+        <div class="info" style="min-height:220px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><div class="muted">Visão Geral</div><div id="scenarioTitle" style="font-weight:800">Energia Solar — Expansão</div></div>
+            <div><button class="btn" id="exportSimBtn">Exportar CSV</button></div>
+          </div>
+
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+            <div style="flex:1;min-width:160px" class="info"><div class="muted">Impacto PIB (últ. ano)</div><div id="pibImpact" class="stat-big">—</div></div>
+            <div style="flex:1;min-width:160px" class="info"><div class="muted">Emissões evitadas</div><div id="co2Impact" class="stat-big">—</div></div>
+            <div style="flex:1;min-width:160px" class="info"><div class="muted">Empregos (líquido)</div><div id="jobsImpact" class="stat-big">—</div></div>
+          </div>
+
+          <div style="margin-top:12px">
+            <canvas id="simChart" style="width:100%;height:220px;border-radius:8px;background:transparent"></canvas>
+          </div>
+        </div>
+
+        <!-- history / cost -->
+        <div class="info">
+          <div class="muted">Última simulação</div>
+          <div style="margin-top:10px"><strong>Custo estimado</strong><div id="costEst" style="margin-top:6px;font-weight:800">—</div></div>
+          <div style="margin-top:12px"><button class="btn" id="showHistoryBtn">Histórico</button></div>
+          <div id="simHistory" style="margin-top:10px;max-height:220px;overflow:auto"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVESTIMENTO & CONTACT -->
+    <section id="contato" class="card">
+      <h2>Contato & Investidores</h2>
+      <p class="muted">Para data-room e decks: <a style="color:var(--neon)" href="mailto:jardelmiguellopes03@gmail.com">jardelmiguellopes03@gmail.com</a></p>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:12px">
+        <input id="invName" placeholder="Nome / Fundo" style="flex:1;min-width:200px;padding:10px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04)">
+        <input id="invEmail" placeholder="Email" style="flex:1;min-width:200px;padding:10px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04)">
+        <input id="invTicket" placeholder="Ticket (US$)" type="number" style="width:160px;padding:10px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04)">
+        <button class="btn primary" id="investSubmit">Manifestar Interesse</button>
+      </div>
+      <div id="investList" style="margin-top:12px;max-height:200px;overflow:auto"></div>
+    </section>
+
+    <footer class="small">© 2025 Axiom Core — Material confidencial</footer>
+  </div>
+
+  <!-- Audio files (place these .mp3 next to this HTML) -->
+  <audio id="futuristAudio" src="futurist_startup.mp3" preload="auto"></audio>
+  <audio id="epicAudio" src="ax_epic_historic.mp3" preload="auto"></audio>
+
+<script>
+/* -------------------------
+   Helpers & UI wiring
+   ------------------------- */
+function scrollToSection(id){ const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth'}); }
+
+/* AX text: after initial boot spin (2.2s) keep glow only */
+window.addEventListener('load', () => {
+  // swap boot spin -> glow-only after 2.2s
+  setTimeout(()=>{
+    document.querySelectorAll('.ax-text').forEach(t=>{
+      t.classList.remove('boot-spin');
+      t.classList.add('glow-only');
+    });
+  }, 2200);
+
+  // play futurist audio softly on load (best-effort)
+  const fut = document.getElementById('futuristAudio');
+  if(fut){
+    fut.volume = 0.18;
+    fut.currentTime = 0;
+    fut.play().catch(()=>{ /* autoplay may be blocked, user can click playFuturistBtn */ });
+  }
+});
+
+/* Play/stop epic sound buttons */
+document.addEventListener('DOMContentLoaded', ()=>{
+  const epic = document.getElementById('epicAudio');
+  document.getElementById('playEpicBtn').addEventListener('click', async ()=>{
+    epic.volume = 0.25;
+    epic.currentTime = 0;
+    try{ await epic.play(); }catch(e){ console.log('Epic autoplay blocked', e); alert('Clique novamente para tocar o tema épico (autoplay bloqueado pelo navegador).'); }
+  });
+  document.getElementById('stopEpicBtn').addEventListener('click', ()=>{ epic.pause(); epic.currentTime=0; });
+
+  // allow user to trigger futurist sound manually if autoplay blocked
+  document.getElementById('playFuturistBtn').addEventListener('click', ()=>{
+    const fut = document.getElementById('futuristAudio'); fut.volume=0.18; fut.currentTime=0; fut.play().catch(()=>{});
+  });
+});
+
+/* -------------------------
+   Deterministic simulator (no randomness)
+   ------------------------- */
+
+/* Baseline proxies (editable) */
+const GLOBAL_GDP_PROXY_USD = 100_000_000_000_000; // $100T proxy
+const GLOBAL_CO2_PROXY_MT = 37000;
+const GLOBAL_RENEWABLE_JOBS_M = 13.7;
+
+function baselinePibIndex(dur){
+  const arr=[]; let idx=100;
+  for(let y=1;y<=dur;y++){ idx *= 1.02; arr.push(Number(idx.toFixed(3))); }
+  return arr;
+}
+function baselineCo2Series(dur){
+  const arr=[]; let v=GLOBAL_CO2_PROXY_MT;
+  for(let y=1;y<=dur;y++){ v *= 1 + 0.002; arr.push(Number(v.toFixed(2))); }
+  return arr;
+}
+function baselineJobsSeries(dur){
+  const arr=[]; let v = GLOBAL_RENEWABLE_JOBS_M * 1000;
+  for(let y=1;y<=dur;y++){ v *= 1.01; arr.push(Number(v.toFixed(2))); }
+  return arr;
+}
+
+function computeScenario(scenario, intensity, dur){
+  const baseP = baselinePibIndex(dur), baseC = baselineCo2Series(dur), baseJ = baselineJobsSeries(dur);
+  const out = {pib:[], co2:[], jobs:[]};
+  const scale = intensity/100;
+  for(let y=1;y<=dur;y++){
+    if(scenario==='solar'){
+      const addedP = baseP[y-1] * (scale * 0.01 * y); //  proxy effect on index
+      const avoided = scale * y * 0.5; // Mt avoided proxy
+      out.pib.push(Number((baseP[y-1] + addedP).toFixed(3)));
+      out.co2.push(Number(Math.max(0, baseC[y-1] - avoided).toFixed(3)));
+      out.jobs.push(Number((baseJ[y-1] + scale * y * 50).toFixed(2)));
+    } else if(scenario==='carbon'){
+      const reduction = Math.min(0.5, scale * 0.02 * y);
+      out.co2.push(Number((baseC[y-1] * (1 - reduction)).toFixed(3)));
+      out.pib.push(Number((baseP[y-1] * (1 - scale * 0.002 * Math.min(1, y/3))).toFixed(3)));
+      out.jobs.push(Number((baseJ[y-1] * (1 - scale * 0.001 * y)).toFixed(2)));
+    } else if(scenario==='agri'){
+      const avoided = scale * y * 0.2;
+      out.co2.push(Number(Math.max(0, baseC[y-1] - avoided).toFixed(3)));
+      out.pib.push(Number((baseP[y-1] * (1 + scale * 0.001 * y)).toFixed(3)));
+      out.jobs.push(Number((baseJ[y-1] + scale * y * 10).toFixed(2)));
+    } else {
+      // pand / health
+      out.pib.push(Number((baseP[y-1] * (1 + scale * 0.0005 * Math.min(y,5))).toFixed(3)));
+      out.co2.push(Number((baseC[y-1] * (1 - scale * 0.0002 * y)).toFixed(3)));
+      out.jobs.push(Number((baseJ[y-1] + scale * y * 5).toFixed(2)));
+    }
+  }
+  return out;
+}
+
+/* Chart (Chart.js) */
+let simChart = null;
+function renderSimChart(series){
+  const labels = series.pib.map((_,i)=>`Ano ${i+1}`);
+  const ctx = document.getElementById('simChart').getContext('2d');
+  if(simChart) simChart.destroy();
+  simChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label:'PIB (índice)', data: series.pib, borderColor:'#00fff2', backgroundColor:'rgba(0,255,242,0.08)', tension:0.3, fill:true },
+        { label:'Emissões (Mt CO₂)', data: series.co2, borderColor:'#6b5bff', backgroundColor:'rgba(107,91,255,0.06)', tension:0.3, fill:true },
+        { label:'Empregos (k)', data: series.jobs, borderColor:'#22c55e', backgroundColor:'rgba(34,197,94,0.06)', tension:0.3, fill:true }
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{ legend:{ labels:{ color:'#9fb3bf' }}, tooltip:{ mode:'index', intersect:false } },
+      scales: { x:{ ticks:{ color:'#9fb3bf' }, grid:{ color:'rgba(255,255,255,0.03)' } }, y:{ ticks:{ color:'#9fb3bf' }, grid:{ color:'rgba(255,255,255,0.03)' } } }
+    }
+  });
+}
+
+/* UI actions: run sim deterministic, update KPIs, store history */
+(function uiSim(){
+  const runBtn = document.getElementById('runSimBtn');
+  const resetBtn = document.getElementById('resetSimBtn');
+  const exportBtn = document.getElementById('exportSimBtn');
+  const scenarioTitle = document.getElementById('scenarioTitle');
+  const simRunsEl = document.getElementById('simHistory'); // repurposed for list
+  const simKey = 'ax_sim_history_v1';
+
+  function loadHistory(){ try{ return JSON.parse(localStorage.getItem(simKey)||'[]'); }catch(e){return [];} }
+  function saveHistory(arr){ localStorage.setItem(simKey, JSON.stringify(arr)); renderHistory(); }
+  function renderHistory(){ const list = loadHistory(); const el = document.getElementById('simHistory'); el.innerHTML=''; if(list.length===0){ el.innerHTML='<div class="muted">Nenhuma simulação registrada</div>'; return; } list.slice().reverse().forEach(s=>{ const d = document.createElement('div'); d.style.padding='8px'; d.style.borderBottom='1px solid rgba(255,255,255,0.03)'; d.innerHTML = `<div style="font-weight:700">${s.scenario} — ${s.intensity}% — ${s.duration} anos</div><div class="muted" style="font-size:13px">${new Date(s.ts).toLocaleString()}</div>`; el.appendChild(d); }); }
+  renderHistory();
+
+  runBtn.addEventListener('click', ()=> {
+    const scenario = document.getElementById('scenarioSelect').value;
+    const intensity = Number(document.getElementById('intensity').value || 0);
+    const duration = Math.max(1, Number(document.getElementById('duration').value || 1));
+
+    const series = computeScenario(scenario, intensity, duration);
+    // KPIs - last year
+    const finalPib = series.pib[series.pib.length-1];
+    const finalCo2 = series.co2[series.co2.length-1];
+    const finalJobs = series.jobs[series.jobs.length-1];
+
+    document.getElementById('scenarioTitle').textContent = ({solar:'Energia Solar — Expansão', carbon:'Imposto sobre Carbono', agri:'Agricultura Sustentável', pand:'Investimento em Saúde'})[scenario] || scenario;
+    document.getElementById('pibImpact').textContent = finalPib + ' idx';
+    document.getElementById('co2Impact').textContent = finalCo2 + ' Mt';
+    document.getElementById('jobsImpact').textContent = finalJobs + ' k';
+
+    // simple cost proxy
+    let cost = 0;
+    if(scenario==='solar'){ cost = intensity * duration * 800_000; } // USD proxy per intensity-year
+    else if(scenario==='agri'){ cost = intensity * duration * 200_000; }
+    else if(scenario==='pand'){ cost = intensity * duration * 5_000_000; }
+    else { cost = intensity * duration * 400_000; }
+    document.getElementById('costEst').textContent = 'US$ ' + cost.toLocaleString();
+
+    // chart + store history
+    renderSimChart(series);
+    const hist = loadHistory();
+    hist.push({scenario, intensity, duration, ts:Date.now(), result:{pib:finalPib, co2:finalCo2, jobs:finalJobs, cost}});
+    saveHistory(hist);
+
+    // play subtle futurist sound when running (if allowed)
+    const fut = document.getElementById('futuristAudio');
+    if(fut){ fut.currentTime = 0; fut.play().catch(()=>{}); }
+
+  });
+
+  resetBtn.addEventListener('click', ()=> {
+    document.getElementById('scenarioSelect').value='solar';
+    document.getElementById('intensity').value=30;
+    document.getElementById('duration').value=10;
+    document.getElementById('pibImpact').textContent = '—';
+    document.getElementById('co2Impact').textContent = '—';
+    document.getElementById('jobsImpact').textContent = '—';
+    document.getElementById('costEst').textContent = '—';
+    if(simChart){ simChart.destroy(); simChart = null; }
+    document.getElementById('simHistory').innerHTML = '<div class="muted">Nenhuma simulação registrada</div>';
+    localStorage.removeItem(simKey);
+  });
+
+  exportBtn.addEventListener('click', ()=>{
+    const hist = loadHistory();
+    if(hist.length===0){ alert('Nenhuma simulação para exportar.'); return; }
+    const csvRows = ['scenario,intensity,duration,ts,pib,co2,jobs,cost'];
+    hist.forEach(h=>{
+      const r = [h.scenario, h.intensity, h.duration, h.ts, h.result.pib, h.result.co2, h.result.jobs, h.result.cost].join(',');
+      csvRows.push(r);
+    });
+    const blob = new Blob([csvRows.join('\n')], {type:'text/csv'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'axiom_simulations.csv'; a.click(); URL.revokeObjectURL(a.href);
+  });
+
+  // initial history render
+  renderHistory();
+})();
+
+/* -------------------------
+   Investors quick local store
+   ------------------------- */
+(function investors(){
+  const key = 'ax_investors_v1';
+  const investSubmit = document.getElementById('investSubmit');
+  const render = ()=>{
+    const list = JSON.parse(localStorage.getItem(key)||'[]');
+    const el = document.getElementById('investList'); el.innerHTML='';
+    if(list.length===0){ el.innerHTML='<div class="muted">Nenhum investidor registrado</div>'; return; }
+    list.slice().reverse().forEach(i=>{
+      const d = document.createElement('div'); d.style.padding='8px'; d.style.borderBottom='1px solid rgba(255,255,255,0.03)';
+      d.innerHTML = `<div style="font-weight:700">${i.name} — US$ ${Number(i.ticket).toLocaleString()}</div><div class="muted" style="font-size:13px">${i.email} • ${new Date(i.ts).toLocaleString()}</div>`;
+      el.appendChild(d);
+    });
+  };
+  investSubmit.addEventListener('click', ()=>{
+    const name = document.getElementById('invName').value.trim();
+    const email = document.getElementById('invEmail').value.trim();
+    const ticket = Number(document.getElementById('invTicket').value) || 0;
+    if(!name || !email || ticket <= 0){ alert('Preencha nome, email e ticket válido'); return; }
+    const list = JSON.parse(localStorage.getItem(key)||'[]'); list.push({name,email,ticket,ts:Date.now()}); localStorage.setItem(key, JSON.stringify(list));
+    render();
+    document.getElementById('invName').value=''; document.getElementById('invEmail').value=''; document.getElementById('invTicket').value='';
+    alert('Investidor registrado (soft-commit local)');
+  });
+  render();
+})();
+
+/* -------------------------
+   Export pitch PDF (simple approach: generate text blob)
+   ------------------------- */
+function downloadPitch(){
+  // Minimal pitch export: create a simple text-based PDF via Blob (quick). For a richer PDF use server-side/reportlab.
+  const pitch = [
+    'Axiom Core — Pitch',
+    '',
+    'Problema: Dados fragmentados e vieses institucionais.',
+    'Solução: Plataforma auditável que cruza OWID / WorldBank / IRENA e executa simulações determinísticas.',
+    '',
+    'Contato: jardelmiguellopes03@gmail.com'
+  ].join('\n');
+  const blob = new Blob([pitch], {type:'text/plain'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Axiom_Core_Pitch.txt'; a.click(); URL.revokeObjectURL(a.href);
+}
+
+/* -------------------------
+   Small accessibility convenience: allow keyboard 'E' to toggle epic sound
+   ------------------------- */
+window.addEventListener('keydown', (e)=>{
+  if(e.key.toLowerCase()==='e'){ const epic = document.getElementById('epicAudio'); if(epic.paused){ epic.play().catch(()=>{}); } else { epic.pause(); epic.currentTime=0; } }
+});
+</script>
+</body>
+</html>
